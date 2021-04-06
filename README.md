@@ -95,4 +95,4 @@ python scripts/make_kitti_submission.py --network=raft3d.raft3d_laplacian --mode
 
 
 ## Training
-I will provide training scripts 1-2 weeks before the CVPR 2021 conference.
+I will provide training sometime before the CVPR 2021 conference.
