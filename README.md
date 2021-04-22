@@ -89,7 +89,7 @@ First download the [KITTI Scene Flow dataset](http://www.cvlibs.net/datasets/kit
 You can then run the KITTI submission script
 
 ```
-python scripts/make_kitti_submission.py --network=raft3d.raft3d_laplacian --model=raft3d_kitti.pth
+python scripts/kitti_submission.py --network=raft3d.raft3d_bilaplacian --model=raft3d_kitti.pth
 ```
 
 

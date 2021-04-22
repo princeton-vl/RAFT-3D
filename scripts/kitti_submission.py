@@ -16,10 +16,28 @@ from data_readers.kitti import KITTIEval
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
+import matplotlib.pyplot as plt
 from glob import glob
 from data_readers.frame_utils import *
 
-def prepare_images_and_depths(image1, image2, depth1, depth2, depth_scale=0.2):
+
+def display(img, tau, phi):
+    """ display se3 fields """
+    fig, (ax1, ax2, ax3) = plt.subplots(1,3)
+    ax1.imshow(img[:, :, ::-1] / 255.0)
+
+    tau_img = np.clip(tau, -0.1, 0.1)
+    tau_img = (tau_img + 0.1) / 0.2
+
+    phi_img = np.clip(phi, -0.1, 0.1)
+    phi_img = (phi_img + 0.1) / 0.2
+
+    ax2.imshow(tau_img)
+    ax3.imshow(phi_img)
+    plt.show()
+
+
+def prepare_images_and_depths(image1, image2, depth1, depth2, depth_scale=1.0):
     """ padding, normalization, and scaling """
     
     ht, wd = image1.shape[-2:]
@@ -52,6 +70,7 @@ def make_kitti_submission(model):
     for i_batch, data_blob in enumerate(test_loader):
         image1, image2, disp1, disp2, intrinsics = [item.cuda() for item in data_blob]
 
+        img1 = image1[0].permute(1,2,0).cpu().numpy()
         depth1 = DEPTH_SCALE * (intrinsics[0,0] / disp1)
         depth2 = DEPTH_SCALE * (intrinsics[0,0] / disp2)
 
@@ -61,6 +80,12 @@ def make_kitti_submission(model):
 
         Ts = model(image1, image2, depth1, depth2, intrinsics, iters=16)
         tau_phi = Ts.log()
+
+        # uncomment to diplay motion field
+        # tau, phi = Ts.log().split([3,3], dim=-1)
+        # tau = tau[0].cpu().numpy()
+        # phi = phi[0].cpu().numpy()
+        # display(img1, tau, phi)
 
         # compute optical flow
         flow, _, _ = pops.induced_flow(Ts, depth1, intrinsics)
@@ -86,7 +111,7 @@ if __name__ == '__main__':
     RAFT3D = importlib.import_module(args.network).RAFT3D
 
     model = torch.nn.DataParallel(RAFT3D(args))
-    model.load_state_dict(torch.load(args.model), strict=False)
+    model.load_state_dict(torch.load(args.model))
 
     model.cuda()
     model.eval()

@@ -28,8 +28,8 @@ class KITTIEval(data.Dataset):
         mode = "testing"
         self.image1_list = sorted(glob(osp.join(root, mode, "image_2/*10.png")))
         self.image2_list = sorted(glob(osp.join(root, mode, "image_2/*11.png")))
-        self.disp1_ga_list = sorted(glob(osp.join(root, mode, "disp_ganet_testing/*10.png")))
-        self.disp2_ga_list = sorted(glob(osp.join(root, mode, "disp_ganet_testing/*11.png")))
+        self.disp1_ga_list = sorted(glob(osp.join(root, mode, "disp_ganet_{}/*10.png".format(mode))))
+        self.disp2_ga_list = sorted(glob(osp.join(root, mode, "disp_ganet_{}/*11.png".format(mode))))
         self.calib_list = sorted(glob(osp.join(root, mode, "calib_cam_to_cam/*.txt")))
 
         self.intrinsics_list = []
