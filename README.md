@@ -9,7 +9,7 @@ Zachary Teed and Jia Deng, CVPR 2021
 @inproceedings{teed2021raft3d,
   title={RAFT-3D: Scene Flow using Rigid-Motion Embeddings},
   author={Teed, Zachary and Deng, Jia},
-  booktitle={Conference on Computer Vision and Pattern Recognition},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2021},
 }
 ```
@@ -95,4 +95,4 @@ python scripts/kitti_submission.py --network=raft3d.raft3d_bilaplacian --model=r
 
 
 ## Training
-I will provide training scripts 1-2 weeks before the CVPR 2021 conference.
+I will provide training sometime before the CVPR 2021 conference.
