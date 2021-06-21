@@ -95,4 +95,10 @@ python scripts/kitti_submission.py --network=raft3d.raft3d_bilaplacian --model=r
 
 
 ## Training
-I will provide training sometime before the CVPR 2021 conference.
+
+Training requires a GPU with 24Gb of memory. First download the required datasets for training and evaluation. 
+
+### Training on FlyingThings3D
+```
+python -u scripts/train_things.py --name=r3d --batch_size=4 --lr=0.0002 --network=raft3d.raft3d_bilaplacian
+```

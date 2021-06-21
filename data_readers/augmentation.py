@@ -61,7 +61,7 @@ class RGBDAugmentor:
         return image_stack.split([wd, wd], -1)
 
     def __call__(self, image1, image2, depth1, depth2, flows, intrinsics):
-        # image1, image2 = self.color_transform(image1, image2)
+        image1, image2 = self.color_transform(image1, image2)
         return self.spatial_transform(image1, image2, depth1, depth2, flows, intrinsics)
 
 
@@ -157,7 +157,6 @@ class SparseAugmentor:
 
         return image1, image2, depth1, depth2, flow, valid, intrinsics
 
-
     def color_transform(self, image1, image2):
         """ Peform same perturbation over all images """
         wd = image1.shape[-1]
@@ -166,5 +165,5 @@ class SparseAugmentor:
         return image_stack.split([wd, wd], -1)
 
     def __call__(self, image1, image2, depth1, depth2, flow, valid, intrinsics):
-        # image1, image2 = self.color_transform(image1, image2)
+        image1, image2 = self.color_transform(image1, image2)
         return self.spatial_transform(image1, image2, depth1, depth2, flow, valid, intrinsics)

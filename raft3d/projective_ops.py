@@ -3,8 +3,7 @@ import torch.nn.functional as F
 
 from .sampler_ops import *
 
-
-MIN_DEPTH = 0.1
+MIN_DEPTH = 0.05
 
 def project(Xs, intrinsics):
     """ Pinhole camera projection """
