@@ -121,7 +121,6 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--name', default='bla', help='name your experiment')
-    parser.add_argument('--dataset', default='things', help='dataset for training')
     parser.add_argument('--network', default='raft3d.raft3d', help='name your experiment')
     parser.add_argument('--ckpt', help='checkpoint to restore')
     parser.add_argument('--gpus', type=int, nargs='+', default=[0])

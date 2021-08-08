@@ -93,7 +93,6 @@ python scripts/kitti_submission.py --network=raft3d.raft3d_bilaplacian --model=r
 ```
 
 
-
 ## Training
 
 Training requires a GPU with 24Gb of memory. First download the required datasets for training and evaluation. 
@@ -101,4 +100,14 @@ Training requires a GPU with 24Gb of memory. First download the required dataset
 ### Training on FlyingThings3D
 ```
 python -u scripts/train_things.py --name=r3d --batch_size=4 --lr=0.0002 --network=raft3d.raft3d_bilaplacian
+```
+
+### Finetuning on KITTI
+```
+python -u scripts/train_kitti.py --name=r3d_kitti --batch_size=4 --lr=0.0001 --network=raft3d.raft3d_bilaplacian --ckpt=checkpoints/r3d_200000.pth
+```
+
+You can create a submission to the KITTI benchmark by running
+```
+python scripts/kitti_submission.py --model=checkpoints/r3d_kitti_050000.pth --network=raft3d.raft3d_bilaplacian
 ```

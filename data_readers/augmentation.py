@@ -101,7 +101,7 @@ class SparseAugmentor:
         self.crop_size = crop_size
         self.augcolor = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.2, hue=0.4/3.14),
+            transforms.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.25, hue=0.4/3.14),
             transforms.ToTensor()])
 
 
@@ -128,10 +128,10 @@ class SparseAugmentor:
             
             intrinsics *= torch.as_tensor([sx, sy, sx, sy])
 
-            image1 = F.interpolate(image1[None], [ht1, wd1], mode='bilinear', align_corners=True)[0]
-            image2 = F.interpolate(image2[None], [ht1, wd1], mode='bilinear', align_corners=True)[0]
-            depth1 = F.interpolate(depth1[None,None], [ht1, wd1], mode='bilinear', align_corners=True)[0,0]
-            depth2 = F.interpolate(depth2[None,None], [ht1, wd1], mode='bilinear', align_corners=True)[0,0]
+            image1 = F.interpolate(image1[None], [ht1, wd1], mode='bilinear', align_corners=False)[0]
+            image2 = F.interpolate(image2[None], [ht1, wd1], mode='bilinear', align_corners=False)[0]
+            depth1 = F.interpolate(depth1[None,None], [ht1, wd1], mode='nearest')[0,0]
+            depth2 = F.interpolate(depth2[None,None], [ht1, wd1], mode='nearest')[0,0]
 
             flow, valid = resize_sparse_image(flow, valid, ht1, wd1)
             flow = flow * torch.as_tensor([sx, sy, 1])
