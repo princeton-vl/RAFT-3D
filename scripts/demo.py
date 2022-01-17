@@ -91,7 +91,7 @@ def demo(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', default='models/raft3d.pth', help='checkpoint to restore')
+    parser.add_argument('--model', default='raft3d.pth', help='checkpoint to restore')
     parser.add_argument('--network', default='raft3d.raft3d', help='network architecture')
     args = parser.parse_args()
 
