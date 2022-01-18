@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from torchvision.models.resnet import ResNet, Bottleneck
-from torchvision.models.utils import load_state_dict_from_url
+from torchvision._internally_replaced_utils import load_state_dict_from_url
 
 MODEL_URL = 'https://download.pytorch.org/models/resnet50-19c8e357.pth'
 
